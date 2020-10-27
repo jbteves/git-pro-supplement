@@ -1,6 +1,6 @@
 ## Final .pdfs
-src/gps.pdf
-src/gps_sln.pdf
+gps/gps.pdf
+gps/gps_sln.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
