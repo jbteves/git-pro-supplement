@@ -1,5 +1,14 @@
 # git-pro-supplement
-Supplemental exercise for git pro
+Supplemental exercises for git pro.
+The main way to create the .pdf for the books is to do the following from
+this directory:
+```
+cd gps
+make book
+```
+which will create two PDF files: `gps.pdf` and `gps_sln.pdf`.
+The first is exercises, the second is exercise solutions.
+
 
 # Git Pro
 The tremendously helpful Git Pro is freely available 
