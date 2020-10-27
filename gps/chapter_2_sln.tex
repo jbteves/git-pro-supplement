@@ -227,6 +227,40 @@
         before, but with fewer steps.
         Commit the change, and you'll be back to the point you started, but
         now with two commits extra!
+\end{enumerate}
+
+\section{Viewing the Commit History}
+
+\subsection{Questions for Understanding}
+\begin{enumerate}
+    \item \verb+%ae+
+    \item There are so many options for viewing the git log because it 
+        allows you to efficiently find relevant information about changes
+        made over the course of the project history.
+        This question is mostly to stimulate thought.
+\end{enumerate}
 
 
+\subsection{Exercises}
+\begin{enumerate}
+    \item
+        \begin{verbatim}
+        git log -p -4
+        \end{verbatim}
+    \item
+        \begin{verbatim}
+        git log --since="last week"
+        \end{verbatim}
+    \item
+        \begin{verbatim}
+        git log --since=YYYY-MM-01
+        \end{verbatim}
+    \item
+        \begin{verbatim}
+        git log --pretty="%h %an %s"
+        \end{verbatim}
+    \item
+        \begin{verbatim}
+        git log --pretty="%h %s" -3
+        \end{verbatim}
 \end{enumerate}
