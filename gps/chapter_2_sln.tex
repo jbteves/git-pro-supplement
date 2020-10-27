@@ -11,27 +11,222 @@
 \begin{enumerate}
     \item Creating the folder may vary, but using bash:
         \begin{verbatim}
-            mkdir recipes
-            cd recipes/
-            git init
+        mkdir recipes
+        cd recipes/
+        git init
         \end{verbatim}
         You should see a message from git that reads something like this:
         \begin{verbatim}
-            Initialized empty Git repository in /Users/person/Downloads/recipes/.git/
+        Initialized empty Git repository in /Users/person/Downloads/recipes/.git/
         \end{verbatim}
     \item \verb+git clone https://github.com/jbteves/git-pro-supplement.git+
         You will be prompted for a GitHub username and password.
         After authenticating, you should see a message from git that looks
         like this:
         \begin{verbatim}
-            remote: Enumerating objects: 19, done.
-            remote: Counting objects: 100% (19/19), done.
-            remote: Compressing objects: 100% (13/13), done.
-            remote: Total 19 (delta 6), reused 15 (delta 6), pack-reused 0
-            Receiving objects: 100% (19/19), 7.46 KiB | 1.07 MiB/s, done.
-            Resolving deltas: 100% (6/6), done.
+        remote: Enumerating objects: 19, done.
+        remote: Counting objects: 100% (19/19), done.
+        remote: Compressing objects: 100% (13/13), done.
+        remote: Total 19 (delta 6), reused 15 (delta 6), pack-reused 0
+        Receiving objects: 100% (19/19), 7.46 KiB | 1.07 MiB/s, done.
+        Resolving deltas: 100% (6/6), done.
         \end{verbatim}
         The number of objects, deltas, and other values will be different
         since this repository will evolve in the time since I've run the
         command.
+\end{enumerate}
+
+\section{Recording Changes to the Repository}
+
+\subsection{Questions for Understanding}
+\begin{enumerate}
+    \item Untracked, because there is no record of it in the existing
+        repository.
+    \item Yes, you can add folders with the \verb+git add+ command.
+    \item The file had modifications which were staged, and then additional
+        edits were made afterwards. Because the edits have not yet been
+        staged, the modifications are listed under ``Changes not staged for
+        commit."
+    \item When running \verb+git status -s+, the left column is the set of
+        changes that are staged. The right column is the set of changes that
+        are unstaged.
+    \item \verb+*.pdf+ would ignore all PDF files.
+    \item \verb+git diff+ displays the difference between the staged changes
+        and the current working area, whereas \verb+git diff --cached+
+        displays all of the changes between the staged changes and the
+        latest commit.
+    \item If you use \verb+git commit+ with no arguments, the commit is
+        created when you exit the editor you used to make the commit
+        message.
+    \item If you modify a file or stage it, then attempt to remove it with
+        the \verb+git rm+ command, you must add the \verb+-f+ flag.a
+    \item To stop tracking a file but retain it in the working area, you
+        must add the \verb+--cached+ flag.
+    \item No, git does not track whether files are renamed.
+\end{enumerate}
+
+\subsection{Exercises}
+\begin{enumerate}
+    \item First, create the file. Then use 
+        \begin{verbatim}
+        git add README.txt
+        \end{verbatim}
+        stage it. If you run \verb+git status+ at that point, it should look
+        like this:
+        \begin{verbatim}
+        On branch main
+
+        No commits yet
+
+        Changes to be committed:
+          (use "git rm --cached <file>..." to unstage)
+                new file:   README.txt
+        \end{verbatim}
+        Then you can commit via 
+        \begin{verbatim}
+        git commit
+        \end{verbatim}
+        entering text for the commit message in your favorite editor, or 
+        something like
+        \begin{verbatim}
+        git commit -m "Added README.txt"
+        \end{verbatim}
+    \item You'll make the file, and then stage the changes with
+        \begin{verbatim}
+            git add cookies.txt
+        \end{verbatim}
+        If you run \verb+git status+ you'll see the following:
+        \begin{verbatim}
+        On branch main
+        Changes to be committed:
+          (use "git restore --staged <file>..." to unstage)
+                new file:   cookies.txt
+
+        \end{verbatim}
+        Then, edit the file and add baking instructions.
+        Running \verb+git status+ will show you this:
+        \begin{verbatim}
+        On branch main
+        Changes to be committed:
+          (use "git restore --staged <file>..." to unstage)
+                new file:   cookies.txt
+
+        Changes not staged for commit:
+          (use "git add <file>..." to update what will be committed)
+          (use "git restore <file>..." to discard changes in working directory)
+                modified:   cookies.txt
+        \end{verbatim}
+        Now, commit the changes with something like
+        \begin{verbatim}
+        git commit -m "Added ingredients"
+        \end{verbatim}
+        recalling that for now, the only changes that are \emph{staged} are
+        the ingredients themselves.
+        Afterwards, the status should read
+        \begin{verbatim}
+        On branch main
+        Changes not staged for commit:
+          (use "git add <file>..." to update what will be committed)
+          (use "git restore <file>..." to discard changes in working directory)
+                modified:   cookies.txt
+
+        no changes added to commit (use "git add" and/or "git commit -a")
+        \end{verbatim}
+        Now, stage and commit the next set of changes with
+        \begin{verbatim}
+        git add cookies.txt
+        git commit -m "Added baking instructions"
+        \end{verbatim}
+    \item Create the file \verb+ignoreme.txt+. 
+        Git status should look like this:
+        \begin{verbatim}
+        On branch main
+        Untracked files:
+          (use "git add <file>..." to include in what will be committed)
+                ignoreme.txt
+
+        nothing added to commit but untracked files present (use "git add" to track)
+        \end{verbatim}
+        and then create
+        \verb+.gitignore+ with the line
+        \begin{verbatim}
+        ignoreme.txt
+        \end{verbatim}
+        The status should now be:
+        \begin{verbatim}
+        On branch main
+        Untracked files:
+          (use "git add <file>..." to include in what will be committed)
+                .gitignore
+
+        nothing added to commit but untracked files present (use "git add" to track)
+        \end{verbatim}
+        You'll now need to commit the \verb+.gitignore+ file.
+        Afterwards, the status should be
+        \begin{verbatim}
+        On branch main
+        nothing to commit, working tree clean
+        \end{verbatim}
+    \item Add the following lines to your \verb+.gitignore+ and then commit
+        it.
+        \begin{verbatim}
+        *.pdf
+        *.docx
+        \end{verbatim}
+        You can try pasting some PDF or Word documents into the directory to
+        verify that they are ignored.
+    \item Create the file and commit it. Use the command
+        \begin{verbatim}
+            git rm --cached hello.txt
+        \end{verbatim}
+        In order to make it untracked.
+        Afterwards, the status will be
+        \begin{verbatim}
+        On branch master
+        Changes to be committed:
+          (use "git restore --staged <file>..." to unstage)
+                deleted:    hello.txt
+
+        Untracked files:
+          (use "git add <file>..." to include in what will be committed)
+                hello.txt
+        \end{verbatim}
+        You can then unstage the change by running
+        \begin{verbatim}
+        git restore --staged hello.txt
+        \end{verbatim}
+        After that, the working tree will be clean.
+    \item After changing the name, the status will look like:
+        \begin{verbatim}
+        On branch master
+        Changes not staged for commit:
+          (use "git add/rm <file>..." to update what will be committed)
+          (use "git restore <file>..." to discard changes in working directory)
+                deleted:    hello.txt
+
+        Untracked files:
+          (use "git add <file>..." to include in what will be committed)
+                hello_world.txt
+
+        no changes added to commit (use "git add" and/or "git commit -a")
+        \end{verbatim}
+        You'll have to run
+        \begin{verbatim}
+        git rm hello.txt
+        git add hello_world.txt
+        git commit -m "Changed hello.txt to hello_world.txt"
+        \end{verbatim}
+        which will cycle the status from committing the deletion of
+        \verb+hello.txt+, to renaming \verb+hello.txt -> hello_world.txt+,
+        to, finally, a clean tree.
+        Then, change it back with
+        \begin{verbatim}
+        git mv hello_world.txt hello.txt
+        \end{verbatim}
+        You will note that the status again indicates a rename, exactly like
+        before, but with fewer steps.
+        Commit the change, and you'll be back to the point you started, but
+        now with two commits extra!
+
+
 \end{enumerate}
