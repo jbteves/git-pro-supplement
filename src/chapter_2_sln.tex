@@ -1,0 +1,37 @@
+\section{Getting a Git Repository}
+
+\subsection{Questions for Understanding}
+\begin{enumerate}
+    \item Turning a local directory into a git repository, or cloning an
+        existing repository to your local machine.
+    \item The full copy of all files and changes.
+\end{enumerate}
+
+\subsection{Exercises}
+\begin{enumerate}
+    \item Creating the folder may vary, but using bash:
+        \begin{verbatim}
+            mkdir recipes
+            cd recipes/
+            git init
+        \end{verbatim}
+        You should see a message from git that reads something like this:
+        \begin{verbatim}
+            Initialized empty Git repository in /Users/person/Downloads/recipes/.git/
+        \end{verbatim}
+    \item \verb+git clone https://github.com/jbteves/git-pro-supplement.git+
+        You will be prompted for a GitHub username and password.
+        After authenticating, you should see a message from git that looks
+        like this:
+        \begin{verbatim}
+            remote: Enumerating objects: 19, done.
+            remote: Counting objects: 100% (19/19), done.
+            remote: Compressing objects: 100% (13/13), done.
+            remote: Total 19 (delta 6), reused 15 (delta 6), pack-reused 0
+            Receiving objects: 100% (19/19), 7.46 KiB | 1.07 MiB/s, done.
+            Resolving deltas: 100% (6/6), done.
+        \end{verbatim}
+        The number of objects, deltas, and other values will be different
+        since this repository will evolve in the time since I've run the
+        command.
+\end{enumerate}
